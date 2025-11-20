@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Website</title>
+
+<style>
+/* ——— GLOBAL ——— */
+:root{
+  --bg:#0b1220; --card:#071028; --accent:#0fb9b1; 
+  --muted:#9fb0c8; --glass: rgba(255,255,255,0.03);
+  --radius:12px; --maxw:1100px; 
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:linear-gradient(180deg,var(--bg),#041022);
+  color:#e8f5f6;line-height:1.55;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:20px}
+
+/* ——— HEADER ——— */
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.mark{
+  width:56px;height:56px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800
+}
+
+nav{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:700;
+}
+
+.cta{
+  background:var(--accent);
+  color:#042;
+  padding:10px 14px;
+  border-radius:10px;
+  font-weight:800;
+  text-decoration:none
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+@media(max-width:920px){
+  nav{
+    display:none;
+    flex-direction:column;
+    background:#071028;
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    margin-top:12px;
+  }
+  nav.show{
+    display:flex;
+  }
+  .menu-toggle{display:block}
+}
+
+/* ——— HERO ——— */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:28px;
+  align-items:center;
+}
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr}
+}
+
+.title{font-size:2.2rem;margin:0}
+.subtitle{color:var(--muted);margin-top:8px}
+
+.badges{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.badge{
+  background:var(--glass);
+  padding:8px 10px;
+  border-radius:999px;
+  font-weight:700;
+  color:var(--muted)
+}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:18px;border-radius:14px;
+  box-shadow:0 8px 22px rgba(2,6,23,0.6)
+}
+
+.skills{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;margin-top:12px
+}
+
+.skill{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.04);
+  padding:12px;border-radius:10px
+}
+
+/* —— TWO COLUMN —— */
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+@media(max-width:820px){
+  .two-col{grid-template-columns:1fr}
+}
+
+h2{margin:6px 0 12px}
+p.small{color:var(--muted);margin:0}
+
+/* —— COURSES —— */
+.courses{
+  display:flex;flex-direction:column;gap:8px
+}
+.course{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.03)
+}
+@media(max-width:600px){
+  .course{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
+  }
+}
+
+/* —— PROJECTS —— */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px
+}
+
+/* —— CONTACT —— */
+.contact-form{
+  display:grid;gap:10px
+}
+
+input,textarea{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  padding:10px;
+  border-radius:8px;
+  color:inherit
+}
+
+button{
+  background:var(--accent);
+  border:none;
+  padding:10px 12px;
+  border-radius:10px;
+  font-weight:800
+}
+
+#contact .card{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:12px
+}
+@media(max-width:820px){
+  #contact .card{grid-template-columns:1fr}
+}
+
+footer{
+  padding:28px 0;color:var(--muted);margin-top:16px
+}
+
+.list{margin:0;padding:0;list-style:none}
+
+.pill{
+  background:rgba(255,255,255,0.03);
+  padding:6px 10px;
+  border-radius:999px
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float{
+  position:fixed;bottom:22px;right:22px;
+  background:#25d366;color:white;
+  border-radius:50%;
+  width:56px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.3);
+  z-index:9999;font-size:28px;
+  transition:transform .2s;
+  text-decoration:none;
+}
+.whatsapp-float:hover{transform:scale(1.1)}
+
+
+
+ /* Fullscreen Loader */
+    #number-loader {
+        position: fixed;
+        inset: 0;
+        background: #050A30;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 9999999;
+        transition: opacity 0.6s ease;
+    }
+
+    /* Particle Background */
+    #particles {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 1;
+    }
+
+    /* Circle */
+    .circle {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 6px solid rgba(255,255,255,0.3);
+        border-top-color: #05F2F2;
+        border-bottom-color: #05F2F2;
+        animation: rotate 2s linear infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Number */
+    .circle .num {
+        font-size: 58px;
+        font-weight: 900;
+        color: #05F2F2;
+        text-shadow: 0 0 20px #05F2F2, 0 0 40px #05F2F2;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div id="number-loader">
+    <canvas id="particles"></canvas>
+    <div class="circle">
+        <div class="num">10</div>
+    </div>
+</div>
+
+<div class="wrap">
+    <header>
+      <a class="logo" href="#">
+        <div class="mark">AK</div>
+        <div>
+          <div style="font-weight:900">Arshad Khan</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px"><b>Technical & Education Teacher — 10+ Years</b></div>
+        </div>
+      </a>
+      <div style="display:flex;align-items:center;gap:12px">
+        <nav>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#courses">Courses</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="cta" href="#contact">Book a Class</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ✅ UPDATED & EXPANDED ABOUT SECTION -->
+      <section class="hero" id="about">
+        <div>
+          <h1 class="title">Arshad Khan<br><span style="font-size:14px;">Technical & Education Teacher 🏆</span></h1>
+          <div class="subtitle"><b>10+ Years Experience — Concept Clear | Doubt Killer | Practical Skills</b></div>
+
+          <p style="margin-top:14px;">
+            I’m <strong>Arshad Khan</strong>, a passionate educator and technical trainer with over a decade of experience in teaching 
+            <strong>Computer Applications, Programming, Data Analytics, and Core Subjects like Mathematics and English.</strong>  
+            My mission is to make technical learning simple, practical, and career-oriented — ensuring that every student not only understands the concepts but can also apply them in real-world scenarios.
+          </p>
+
+          <p style="margin-top:10px;">
+            I’ve trained hundreds of students, professionals, and entrepreneurs through <strong>classroom sessions and online platforms</strong>, 
+            focusing on a “learn by doing” approach. My teaching combines <strong>industry tools (Excel, Tally, Photoshop, Python)</strong> 
+            with <strong>academic clarity</strong> to prepare learners for both jobs and higher education.
+          </p>
+
+          <p style="margin-top:10px;">
+            In my classroom, I emphasize:
+            <ul style="margin-top:6px;">
+              <li>✔️ Concept clarity before shortcuts</li>
+              <li>✔️ Regular practice with practical assignments</li>
+              <li>✔️ Real-life examples and case studies</li>
+              <li>✔️ Personalized guidance for every student</li>
+            </ul>
+          </p>
+
+          <div class="badges">
+            <div class="badge">Advance Excel</div>
+            <div class="badge">Data Science</div>
+            <div class="badge">Data Analytics</div>
+            <div class="badge">Web Development</div>
+            <div class="badge">E - Accounting</div>
+            <div class="badge">AutoCAD</div>
+            <div class="badge">C++ | Java | Python</div>
+			<div class="badge">Digital Marketing</div>
+          </div>
+
+          <p class="small" style="margin-top:14px">
+            <strong>Education:</strong> Mathematics — (Arithmetic, Algebra, Trigonometry) <br/>
+										English — (Grammar, Vocabulary, Spoken) from basic to advanced levels.
+          </p>
+
+          <div style="margin-top:18px;display:flex;gap:10px">
+            <a class="pill" href="#contact">Free Demo Class</a>
+            <a class="pill" href="#courses">View Courses</a>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3 style="margin:0">Quick Facts</h3>
+            <div style="margin-top:10px" class="muted">
+              Experienced Technical & Education Trainer with a proven record of helping students excel in both academics and computer skills.
+              Specialized in career-oriented programs combining IT, accounting, and analytical training.
+            </div>
+            <div style="margin-top:12px" class="skills">
+              <div class="skill"><strong>Diploma</strong><div class="muted">DCA, DOA, DWD, DGD, DMM, DFA, ADCA, PDCA, MDCA, PGDCA</div></div>
+              <div class="skill"><strong>Software</strong><div class="muted">MS Office, Marg ERP, Tally Prime, Busy Solution, Google Tools, Hindi & Eng Typing Master</div></div>
+              <div class="skill"><strong>Design</strong><div class="muted">Indesign, Illustrator, Photoshop, Corel Draw, Canva, Premiere Pro, CAD</div></div>
+              <div class="skill"><strong>Programming</strong><div class="muted">HTML, CSS, JS, C++, Python, SQL, PHP, jQuery, Bootstrap, Wordpress, Java, Git</div></div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ✅ REMAINING SECTIONS SAME AS ORIGINAL -->
+      <section id="skills" style="margin-top:18px">
+        <h1>Skills & Tools</h1>
+		<h2 align="center">---------- Basic Skills ----------</h2>
+        <div class="two-col" style="margin-top:8px">
+          <div class="card">
+            <h3 style="margin-top:0">Technical</h3>
+            <ul class="list" style="margin-top:8px">
+				<li>● 🖥 Basic Computer Operations & Typing</li>
+				<li>● 🌐 Internet Browsing & Online Research</li>
+				<li>● 💬 Basic Email Writing & Sending</li>
+				<li>● 📝 MS Word: Typing, Formatting, Page Setup</li>
+				<li>● 🧮 MS Excel: Basic Formulas & Tables</li>
+				<li>● 📊 MS PowerPoint: Simple Presentations</li>
+				<li>● 📤 Google Drive Upload & Gmail Management</li>
+				<li>● 🔍 Data Entry & Basic Data Sorting</li>
+				<li>● 🖼 Canva: Simple Designs & Templates</li>
+				<li>● 🏷 Photoshop: Basic Tools & Editing</li>
+				<li>● 💻 HTML Basics: Headings, Paragraphs, Links</li>
+				<li>● 📌 Python Basics: Print, Variables, Inputs</li>
+				<li>● 🔧 Computer Maintenance & Troubleshooting Basics</li>
+			</ul>
+			</div>
+
+          <div class="card">
+            <h3 style="margin-top:0">Education</h3>
+            <ul class="list" style="margin-top:8px">
+				<li>● 🧮 Basic Arithmetic: Add, Sub, Multi, Division</li>
+				<li>● ➗ Fractions, Decimals & Percentages</li>
+				<li>● 🔢 Number System & Place Value</li>
+				<li>● 🧠 Basic Logical Puzzles & Patterns</li>
+				<li>● 📐 Elementary Geometry Shapes & Properties</li>
+				<li>● ✍ Basic English Grammar: Nouns, Verbs, Adjectives</li>
+				<li>● 📚 Vocabulary Building for Beginners</li>
+				<li>● 📖 Reading Comprehension (Easy Level)</li>
+				<li>● 📝 Sentence Formation & Writing Practice</li>
+				<li>● 🗣 Basic Spoken English Conversations</li>
+				<li>● ❓ Easy Doubt-Solving & Concept Support</li>
+				<li>● 🧩 Small Activities for Learning Engagement</li>
+				<li>● 🎯 Study Habits & Learning Discipline Development</li>
+
+            </ul>
+		  </div>
+	</div>
+      </section>
+      <!-- ✅ REMAINING SECTIONS-Two Advance Course SAME AS ORIGINAL -->
+      <section id="skills" style="margin-top:18px">
+		<h2 align="center">---------- Advance Skills ----------</h2>
+        <div class="two-col" style="margin-top:8px">
+          <div class="card">
+            <h3 style="margin-top:0">Technical</h3>
+			 <ul class="list" style="margin-top:8px">
+				<li>● 📈 Advanced Excel: Lookup, Pivot Table, Dashboard</li>
+				<li>● 📉 Excel Analytics: What-If, Goal Seek, Solver</li>
+				<li>● 📊 Power BI: Data Modeling & DAX Basics</li>
+				<li>● 🐍 Python: Pandas, Data Analysis & CSV Handling</li>
+				<li>● 🗄 SQL: Queries, Joins, Sorting, Filtering</li>
+				<li>● 💼 Tally Prime: GST Invoices & Reports</li>
+				<li>● 🧾 Busy Accounting: Tax & Inventory Management</li>
+				<li>● 🖋 CorelDRAW & InDesign: Layout & Branding Design</li>
+				<li>● 📐 AutoCAD: 2D Plans, Layers, Plotting & 3D Modeling</li>
+				<li>● 💻 C++/Java/Python: OOP, Functions & Logic Building</li>
+				<li>● 🚀 Website Optimization & Responsive Design</li>
+				<li>● 🧠 Data Visualization: Charts, Reports, BI Dashboards</li>
+
+				</ul>
+			</div>
+
+          <div class="card">
+            <h3 style="margin-top:0">Education</h3>
+			<ul class="list" style="margin-top:8px">
+				<li>● 🧮 Advanced Arithmetic: Ratios, Proportions & Averages</li>
+				<li>● 🧩 Competitive Maths: Short Tricks & Speed Techniques</li>
+				<li>● ➕ Geometry: Angles, Triangles, Circles & Constructions</li>
+				<li>● 📐 Mensuration: 2D & 3D Shape Calculations</li>
+				<li>● 🧠 High-Level Reasoning: Coding-Decoding, Syllogisms</li>
+				<li>● 🔍 Logical Aptitude: Series, Analogies & Data Interpretation</li>
+				<li>● ✍ Advanced English Grammar: Clauses & Error Detection</li>
+				<li>● 📖 Reading Comprehension (Exam-Level)</li>
+				<li>● 🗣 Spoken English for Interviews & Presentations</li>
+				<li>● 📝 Essay, Letter & Report Writing Skills</li>
+				<li>● 📊 Student Performance Analysis & Improvement Plans</li>
+				<li>● 🚀 Future Skills Training: Communication, Reasoning, Confidence</li>
+
+
+            </ul>
+		  
+		  
+		  </div>
+	</div>
+      </section>
+
+      <section id="courses" style="margin-top:18px">
+        <h2>Courses & Training</h2>
+        <div class="card courses" style="margin-top:8px">
+<div class="course">
+  <div>✅ MS Office (Word, Excel, Power, Access)</div>
+  <div class="muted">Office Management Word</div>
+</div>
+
+<div class="course">
+  <div>✅ Web Development (HTML, CSS, JavaScript)</div>
+  <div class="muted">Frontend fundamentals</div>
+</div>
+
+<div class="course">
+  <div>✅ Advanced Excel & Dashboards</div>
+  <div class="muted">Pivot tables, KPIs, automation</div>
+</div>
+
+<div class="course">
+  <div>✅ Power BI Reporting</div>
+  <div class="muted">Data modeling + DAX basics</div>
+</div>
+
+<div class="course">
+  <div>✅ Python for Beginners</div>
+  <div class="muted">Logic + programs + data tasks</div>
+</div>
+
+<div class="course">
+  <div>✅ SQL & Database Management</div>
+  <div class="muted">Queries, joins, filtering</div>
+</div>
+
+<div class="course">
+  <div>✅ AutoCAD 2D & Basic 3D</div>
+  <div class="muted">Drafting + plans + plotting</div>
+</div>
+
+<div class="course">
+  <div>✅ Graphic Branding Essentials</div>
+  <div class="muted">Logos, posters, social media kit</div>
+</div>
+
+<div class="course">
+  <div>✅ Digital Marketing (Basics)</div>
+  <div class="muted">SEO, social media, content</div>
+</div>
+
+<div class="course">
+  <div>✅ Typing Master (Hindi + English)</div>
+  <div class="muted">Speed & accuracy training</div>
+</div>
+
+<div class="course">
+  <div>✅ Financial Accounting Fundamentals</div>
+  <div class="muted">Ledger, journal, trail balance</div>
+</div>
+
+<div class="course">
+  <div>✅ GST Practical Training</div>
+  <div class="muted">Billing + returns + entries</div>
+</div>
+
+<div class="course">
+  <div>✅ Spoken English & Personality Development</div>
+  <div class="muted">Communication + confidence</div>
+</div>
+
+<div class="course">
+  <div>✅ Competitive Exam Preparation (Maths + Reasoning)</div>
+  <div class="muted">Short tricks + mock tests</div>
+</div>
+
+<div class="course">
+  <div>✅ Computer Hardware & Software Basics</div>
+  <div class="muted">Installation + troubleshooting</div>
+</div>
+
+<div class="course">
+  <div>✅ Canva Design & Social Media Creatives</div>
+  <div class="muted">Templates + branding + reels</div>
+</div>
+
+        </div>
+      </section>
+
+      <section id="work" style="margin-top:18px">
+        <h2>Selected Work & Projects</h2>
+        <p class="muted">Examples of teaching programs, sample class outlines and student success stories.</p>
+        <div class="projects" style="margin-top:12px">
+          <div class="project card">
+  <strong>1. Excel for Accounts – Class Series</strong>
+  <div class="muted" style="margin-top:6px">
+    A structured 12-session program covering formulas, GST sheets, pivot tables, salary sheets, and practical accounting datasets. Students learn how Excel is used daily in business and finance.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>2. Advanced Excel Dashboard Project</strong>
+  <div class="muted" style="margin-top:6px">
+    Students created interactive dashboards using charts, KPIs, slicers, and cleaned datasets. The project focused on turning raw data into meaningful business insights.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>3. Design Portfolio Workshop</strong>
+  <div class="muted" style="margin-top:6px">
+    A practical workshop where learners designed posters, logos, business cards, and banners using Photoshop, CorelDRAW, and Canva — building a complete mini portfolio.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>4. Data Basics Bootcamp (Excel + Python)</strong>
+  <div class="muted" style="margin-top:6px">
+    Starter program introducing data cleaning, summarization, and visualization in Excel along with basic Python coding for analytics workflows.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>5. Tally Prime & GST Practice Module</strong>
+  <div class="muted" style="margin-top:6px">
+    Hands-on practice in company setup, GST entries, voucher posting, reconciliation, and report generation — simulating real accounting office tasks.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>6. Web Development Mini Projects</strong>
+  <div class="muted" style="margin-top:6px">
+    Students built responsive websites using HTML, CSS, JavaScript, and Bootstrap, including landing pages, personal sites, and form validations.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>7. AutoCAD Drafting Practice (2D & Basic 3D)</strong>
+  <div class="muted" style="margin-top:6px">
+    Training focused on 2D house plans, elevations, dimensioning, layers, and simple 3D objects, following industry-style drafting standards.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>8. Programming Logic Builder Sessions</strong>
+  <div class="muted" style="margin-top:6px">
+    Logic development through C++, Java, and Python with projects like calculators, record systems, looping tasks, and file-handling programs.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>9. Maths & English Booster Program</strong>
+  <div class="muted" style="margin-top:6px">
+    Skill-enhancement program covering arithmetic, algebra, grammar, vocabulary, spoken English, and short-trick problem-solving with weekly tests.
+  </div>
+</div>
+<div class="project card">
+  <strong>10. MS Office Productivity Masterclass</strong>
+  <div class="muted" style="margin-top:6px">
+    A practical training series covering Word, Excel, and PowerPoint with real documentation, reporting, and presentation tasks to boost office-ready skills.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>11. Python Mini Applications Workshop</strong>
+  <div class="muted" style="margin-top:6px">
+    Students built small applications like calculators, file managers, data filters, and pattern generators using Python basics and logical programming.
+  </div>
+</div>
+
+<div class="project card">
+  <strong>12. Graphic Design Branding Kit Project</strong>
+  <div class="muted" style="margin-top:6px">
+    A creative project where learners designed a full brand kit including logo, color palette, business card, poster, and social media templates using Photoshop & Canva.
+  </div>
+</div>
+
+		</div>
+      </section>
+      <section id="contact" style="margin-top:18px">
+        <h2>Contact & Booking</h2>
+        <div class="card" style="margin-top:8px;display:grid;grid-template-columns:1fr 340px;gap:12px">
+          <div>
+            <p class="muted">Interested in a course or want a free demo? Fill the form or use the contact details.</p>
+            <form class="contact-form" id="contactForm">
+              <input type="text" id="name" placeholder="Your name" required />
+              <input type="email" id="email" placeholder="Email" required />
+              <input type="text" id="subject" placeholder="Subject" />
+              <textarea id="message" rows="5" placeholder="Message (class interest, preferred time)"></textarea>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button type="submit">Send Message</button>
+                <a class="pill" href="#">Download CV</a>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <div style="margin-bottom:10px">
+              <div style="font-weight:800">Contact Details</div>
+              <div class="muted" style="margin-top:6px">Email: <strong>technicaleducationhub@gmail.com</strong><br>Phone: <strong>+91 999 062 5438</strong></div>
+            </div>
+
+			<div style="margin-top:8px">
+              <div style="font-weight:800">Address</div>
+              <div class="muted" style="margin-top:6px">1449/126, Main Durga Puri,<br> Durgapuri Shahdara,<strong> New Delhi 110032 India</strong></div>
+            </div>
+
+
+            <div style="margin-top:8px">
+              <div style="font-weight:800">Availability</div>
+              <div class="muted" style="margin-top:6px">Weekdays: <strong>9:00 AM — 5:00pm IST</strong><br>Weekends: Flexible (morning & evening)</div>
+            </div>
+			
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+        <div class="muted">© <span id="year"></span> Arshad Khan — Technical & Education Teacher</div>
+        <div class="muted">Crafted with care ❤️ by © 2025 Arshad Khan. All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ✅ Floating WhatsApp Button -->
+  <a href="https://wa.me/919990625438" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:32px;height:32px">
+  </a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('contactForm') && document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Message received — I can wire this form to email or integrate WhatsApp/bookings when you ask.');
+      this.reset();
+    });
+  </script>
+<script>
+/* ==================
+   PARTICLE BACKGROUND
+===================== */
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+let particlesArray;
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw() {
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    particlesArray = [];
+    let numberOfParticles = 100;
+    for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+initParticles();
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+
+/* ==================
+   NUMBER COUNTDOWN
+===================== */
+
+let count = 10;
+const numBox = document.querySelector("#number-loader .num");
+
+const interval = setInterval(() => {
+    count--;
+    numBox.textContent = count;
+
+    numBox.style.transform = "scale(0.6)";
+    numBox.style.opacity = "0.6";
+    setTimeout(() => {
+        numBox.style.transform = "scale(1)";
+        numBox.style.opacity = "1";
+    }, 50);
+
+    if (count === 0) {
+        clearInterval(interval);
+        const loader = document.getElementById("number-loader");
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 700);
+    }
+}, 1000);
+</script>
+
+
+
+
+</body>
+</html>
