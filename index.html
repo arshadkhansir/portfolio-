@@ -34,7 +34,8 @@ header{
   width:56px;height:56px;border-radius:12px;
   background:linear-gradient(135deg,var(--accent),#7c3aed);
   display:flex;align-items:center;justify-content:center;
-  font-weight:800
+  font-weight:800;
+  
 }
 
 nav{
@@ -154,6 +155,97 @@ p.small{color:var(--muted);margin:0}
   border-radius:10px;
   border:1px solid rgba(255,255,255,0.03)
 }
+
+
+
+
+
+/* Hide default desktop nav on mobile */
+@media(max-width:920px){
+  .desktop-nav, 
+  .desktop-cta {
+    display:none;
+  }
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+  display:none;
+  font-size:32px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+@media(max-width:920px){
+  .menu-btn {
+    display:block;
+    margin-left:auto;
+  }
+}
+
+/* Slide Menu */
+.mobile-menu {
+  position:fixed;
+  top:0;
+  left:-280px;
+  width:260px;
+  height:100%;
+  background:#fff;
+  padding:25px;
+  box-shadow:2px 0 20px rgba(0,0,0,0.2);
+  z-index:99999;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  transition:all .35s ease;
+}
+
+.mobile-menu a {
+  font-size:18px;
+  padding-bottom:4px;
+  border-bottom:1px solid #eee;
+  color:#333;
+  font-weight:600;
+}
+
+.mobile-menu.open {
+  left:0;
+}
+
+/* Close button */
+.close-btn {
+  font-size:26px;
+  cursor:pointer;
+  margin-bottom:10px;
+  width:fit-content;
+}
+
+/* Overlay */
+.menu-overlay {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:all .3s ease;
+}
+
+.menu-overlay.show {
+  opacity:1;
+  pointer-events:auto;
+}
+
+
+
+
+
+
+
+
+
+
 @media(max-width:600px){
   .course{
     flex-direction:column;
@@ -227,6 +319,208 @@ footer{
 
 
 
+
+
+
+/* Scroll-to-Top Super Button */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 22px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 99999;
+
+  /* Gradient Circle */
+  background: linear-gradient(135deg, #ff0080, #7928ca, #2af598);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* MDN Floating Shadow */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25), 
+              0 0 15px rgba(255,0,150,0.4);
+
+  /* Hide initially */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(30px);
+  transition: all .35s ease;
+}
+
+/* Glow Animation Border */
+.scroll-top-btn::before {
+  content:"";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff0080, #00e6ff, #2af598, #ff9a00);
+  filter: blur(12px);
+  z-index: -1;
+  animation: glow 3s linear infinite;
+}
+
+@keyframes glow {
+  0% { filter: blur(12px) brightness(1); }
+  50% { filter: blur(14px) brightness(1.5); }
+  100% { filter: blur(12px) brightness(1); }
+}
+
+/* Arrow inside */
+.scroll-top-btn .arrow {
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  transition: transform .35s ease;
+}
+
+/* Slide-Up Show */
+.scroll-top-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Arrow Rotate on Hover (Desktop only) */
+@media(min-width: 768px) {
+  .scroll-top-btn:hover .arrow {
+    transform: rotate(180deg);
+  }
+}
+
+/* Mobile Responsive */
+@media(max-width: 768px){
+  .scroll-top-btn{
+    width: 46px;
+    height: 46px;
+    bottom: 90px;
+    right: 18px;
+  }
+  .scroll-top-btn .arrow {
+    font-size: 24px;
+  }
+}
+
+/* Extra Small Phones */
+@media(max-width: 400px){
+  .scroll-top-btn{
+    width: 42px;
+    height: 42px;
+    bottom: 78px;
+    right: 16px;
+  }
+  .scroll-top-btn .arrow {
+    font-size: 22px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.premium-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  color: #fff !important;
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s ease;
+  z-index: 2;
+}
+
+.premium-contact-btn strong {
+  color: #fff !important;
+}
+
+.premium-contact-btn::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 60px;
+  background: radial-gradient(circle, rgba(124,58,237,0.45), transparent 70%);
+  animation: pulseRing 2s infinite ease-out;
+  z-index: -1;
+}
+
+.premium-contact-btn::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.15);
+  top: 10%;
+  left: 10%;
+  filter: blur(12px);
+  transition: 0.4s ease;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.premium-contact-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 0 22px rgba(124, 58, 237, 0.6);
+}
+
+.premium-contact-btn:hover::after {
+  filter: blur(20px);
+}
+
+.call-icon {
+  font-size: 18px;
+  color: #fff !important;
+  animation: bounce 1.3s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /* Fullscreen Loader */
     #number-loader {
         position: fixed;
@@ -291,24 +585,49 @@ footer{
 
 <div class="wrap">
     <header>
-      <a class="logo" href="#">
-        <div class="mark">AK</div>
-        <div>
-          <div style="font-weight:900">Arshad Khan</div>
-          <div style="font-size:13px;color:var(--muted);margin-top:4px"><b>Technical & Education Teacher — 10+ Years</b></div>
-        </div>
-      </a>
-      <div style="display:flex;align-items:center;gap:12px">
-        <nav>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#courses">Courses</a>
-          <a href="#work">Work</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="cta" href="#contact">Book a Class</a>
+  <a class="logo" href="#">
+    <div class="mark">AK</div>
+    <div>
+      <div style="font-weight:900">Arshad Khan</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">
+        <b>Technical & Education Teacher — 10+ Years</b>
       </div>
-    </header>
+    </div>
+  </a>
+
+  <!-- Mobile Menu Button -->
+  <div class="menu-btn">☰</div>
+
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#courses">Courses</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  
+</header>
+
+<!-- Mobile Slide Menu -->
+<div class="mobile-menu">
+  <div class="close-btn">✖</div>
+
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#courses">Courses</a>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
+
+    <a href="tel:+919990625438" onclick="scrollToSection('contact')" class="premium-contact-btn">
+  <span class="call-icon">📞</span>Contact Now</a>
+</div>
+
+<!-- Background Overlay -->
+<div class="menu-overlay"></div>
+
+
 
     <main>
       <!-- ✅ UPDATED & EXPANDED ABOUT SECTION -->
@@ -681,9 +1000,6 @@ footer{
               <div class="muted" style="margin-top:6px">Weekdays: <br><strong>9:00 AM — 5:00 PM</strong><br>Monday to Saturday<br> (Sunday Off)</div>
             </div><br> 
 			
-			<div style="display:flex;gap:8px;align-items:center;background-color:green;">
-                	<button type="submit">WhatsApp</button>
-              </div>
         </div>
       </section>
     </main>
@@ -696,10 +1012,82 @@ footer{
     </footer>
   </div>
 
+<div class="scroll-top-btn" onclick="scrollToTop()">
+  <span class="arrow">↑</span>
+</div>
+
+
+
+
   <!-- ✅ Floating WhatsApp Button -->
   <a href="https://wa.me/+91 9990625438" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:32px;height:32px">
   </a>
+
+<script>
+function scrollToSection(id) {
+  const sec = document.getElementById(id);
+  if (sec) sec.scrollIntoView({ behavior: "smooth" });
+}
+</script>
+
+
+
+
+
+
+
+<script>
+window.addEventListener("scroll", () => {
+  const btn = document.querySelector(".scroll-top-btn");
+  if (window.scrollY > 200) {
+    btn.classList.add("show");
+  } else {
+    btn.classList.remove("show");
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+</script>
+
+
+
+
+
+
+<script>
+const menuBtn = document.querySelector(".menu-btn");
+const mobileMenu = document.querySelector(".mobile-menu");
+const closeBtn = document.querySelector(".close-btn");
+const overlay = document.querySelector(".menu-overlay");
+
+// Open Menu
+menuBtn.addEventListener("click", () => {
+  mobileMenu.classList.add("open");
+  overlay.classList.add("show");
+});
+
+// Close Menu (Button)
+closeBtn.addEventListener("click", () => {
+  mobileMenu.classList.remove("open");
+  overlay.classList.remove("show");
+});
+
+// Close Menu (Outside click)
+overlay.addEventListener("click", () => {
+  mobileMenu.classList.remove("open");
+  overlay.classList.remove("show");
+});
+</script>
+
+
+
+
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -800,6 +1188,7 @@ const interval = setInterval(() => {
 
 </body>
 </html>
+
 
 
 
